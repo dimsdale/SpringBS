@@ -1,7 +1,18 @@
 package ukr.dsa.annotations;
 
-/**
- * Created by Surger on 15.05.2016.
- */
+
+import ukr.dsa.annotations.impl.PhoneValidator;
+
+import javax.validation.Constraint;
+import javax.validation.Payload;
+import java.lang.annotation.*;
+
+@Documented
+@Constraint(validatedBy = PhoneValidator.class)
+@Target({ElementType.METHOD, ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
 public @interface Phone {
+    String message() default "{Phone}";
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
 }

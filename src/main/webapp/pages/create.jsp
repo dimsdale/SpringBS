@@ -6,18 +6,30 @@
 <head>
     <title>New Contact</title>
     <style>
-        body { background-color: #eee; font: helvetica; }
-        #container { width: 500px; background-color: #fff;
-            margin: 30px auto; padding: 30px; border-radius: 5px; }
-        .green { font-weight: bold; color: green; }
-        label {width:70px; display:inline-block;}
-        input { display:inline-block; margin-right: 10px; }
-        form {line-height: 160%; }
-        .hide { display: none; }
         .error { color: red; font-size: 0.9em; font-weight: bold; }
     </style>
+    <script src="/pages/js/bootstrap.min.js"></script>
+    <link href="/pages/css/bootstrap.css"  rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 </head>
 <body>
+<div class="navbar navbar-inverse navbar-static-top">
+    <nav class="navbar-inner">
+        <a class="brand">Contact Book</a>
+        <ul class="nav">
+            <li class="divider-vertical"></li>
+            <li><a href="/index"><i class="icon-home"></i>Home </a></li>
+            <li><a href="/logout">Logout</a></li>
+            <li class="dropdown pull-right">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b> </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/project">Project</a></li>
+                    <li><a href="/me"></a>Me </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
 <sec:authorize access="!isAuthenticated()">
     <c:redirect url="/main"/>
 </sec:authorize>
