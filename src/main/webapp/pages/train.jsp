@@ -1,5 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -10,17 +9,13 @@
     <link href="/pages/css/bootstrap.css"  rel="stylesheet">
 </head>
 <body>
-<sec:authorize access="isAuthenticated()">
-    <c:redirect url="/index"/>
-</sec:authorize>
-
 <div class="container">
     <div class="row">
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-                        <span class="sr-only">Open navigation</span>
+                    <span class="sr-only">Open navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -29,28 +24,29 @@
                 </div>
                 <div class="collapse navbar-collapse" id="menu">
                     <ul class="nav navbar-nav">
-                        <li><a href="/register">Register</a> </li>
-                        <li><a href="/login">Login</a> </li>
-                        <li><a href="#">About</a> </li>
+                        <li><a href="#">Super</a> </li>
+                        <li><a href="#">Super</a> </li>
+                        <li><a href="#">Super</a> </li>
+                        <li><a href="#">Super</a> </li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="container">
-    <header>
-        <h1>Welcome!</h1>
-    </header>
-</div>
-<div class="navbar-fixed-bottom row-fluid">
-    <div class="navbar-inner">
-        <div class="container text-center">
-          @Dmitriy Smirnov 2016
-        </div>
-        </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6"><div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+
+        </div></div>
+
+        <div class="col-md-4 col-md-offset-2"></div>
     </div>
-<script src="/pages/js/bootstrap.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+</div>
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>﻿
 </body>
 </html>

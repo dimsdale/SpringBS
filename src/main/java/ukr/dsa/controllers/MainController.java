@@ -13,4 +13,9 @@ public class MainController {
         return "main";
     }
 
+    @RequestMapping(value = "/train", method = RequestMethod.GET)
+    public String train(Model model){
+        return "train";
+    }
+
 }

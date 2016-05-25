@@ -34,36 +34,36 @@
     <c:redirect url="/main"/>
 </sec:authorize>
 <sec:authorize access="isAuthenticated()">
-    <spring:form action="addContact" method="post" modelAttribute="contact">
-        <h2>Insert data</h2>
-        <label>Surname: </label>
-        <spring:input path="surname" id="surname" placeholder="surname"/>
-        <spring:errors path="surname" cssClass="error" />
-        <br/>
-        <label>Name: </label>
-        <spring:input path="name" id="name" placeholder="name"/>
-        <spring:errors path="name" cssClass="error" />
-        <br/>
-        <label>FatherName: </label>
-        <spring:input path="byFatherName" id="byFatherName" placeholder="fathername"/>
-        <spring:errors path="byFatherName" cssClass="error" />
-        <br/>
-        <label>Mobile: </label>
-        <spring:input path="mobileTel" id="mobileTel" placeholder="mobileTel"/>
-        <spring:errors path="mobileTel" cssClass="error" />
-        <br/>
-        <label>Home Tel: </label>
-        <spring:input path="homeTel" id="homeTel" placeholder="homeTel"/>
-        <spring:errors path="homeTel" cssClass="error" />
-        <br/>
-        <label>E-mail: </label>
-        <spring:input path="e_mail" id="e_mail" placeholder="e-mail"/>
-        <spring:errors path="e_mail" cssClass="error" />
-        <br/>
+<div class="container">
+    <div class="row">
+        <div class="well span4 offset4">
 
-        <br/>
-        <input type="submit" id="submitContact"  value="Add">
-    </spring:form>
+            <spring:form action="addContact" method="post" modelAttribute="contact">
+                <h2>Insert data</h2>
+                <spring:input path="surname" id="surname" placeholder="surname"/>
+                <spring:errors path="surname" cssClass="error" />
+                <spring:input path="name" id="name" placeholder="name"/>
+                <spring:errors path="name" cssClass="error" />
+                <spring:input path="byFatherName" id="byFatherName" placeholder="fathername"/>
+                <spring:errors path="byFatherName" cssClass="error" />
+                <spring:input path="mobileTel" id="mobileTel" placeholder="mobileTel"/>
+                <spring:errors path="mobileTel" cssClass="error" />
+                <spring:input path="homeTel" id="homeTel" placeholder="homeTel"/>
+                <spring:errors path="homeTel" cssClass="error" />
+                <spring:input path="e_mail" id="e_mail" placeholder="e-mail"/>
+                <spring:errors path="e_mail" cssClass="error" />
+                <input type="submit" id="submitContact"  value="Add" class="btn btn-success">
+            </spring:form>
+        </div>
+        </div>
+    </div>
 </sec:authorize>
+<div class="navbar-fixed-bottom row-fluid">
+    <div class="navbar-inner">
+        <div class="container text-center">
+            @Dmitriy Smirnov 2016
+        </div>
+    </div>
+</div>
 </body>
 </html>

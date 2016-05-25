@@ -19,21 +19,28 @@
 <script>
 
 </script>
-<div class="navbar navbar-inverse navbar-static-top">
-    <nav class="navbar-inner">
-        <a class="brand">Contact Book</a>
-        <ul class="nav">
-            <li class="divider-vertical"></li>
-            <li><a href="/login">Login</a></li>
-            <li class="dropdown pull-right">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b> </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/project">Project</a></li>
-                    <li><a href="/me"></a>Me </li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+<div class="container">
+    <div class="row">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                        <span class="sr-only">Open navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <%--<a class="navbar-brand" href="#">Company</a>--%>
+                </div>
+                <div class="collapse navbar-collapse" id="menu">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/login">Login</a> </li>
+                        <li><a href="#">About</a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <sec:authorize access="isAuthenticated()">
     <c:redirect url="/index"/>
@@ -58,7 +65,13 @@
         </div>
     </div>
 
-
+    <div class="navbar-fixed-bottom row-fluid">
+        <div class="navbar-inner">
+            <div class="container text-center">
+                @Dmitriy Smirnov 2016
+            </div>
+        </div>
+    </div>
 </sec:authorize>
 </body>
 </html>
