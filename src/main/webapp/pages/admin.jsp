@@ -17,12 +17,10 @@
         <a class = "navbar-brand"><spring:message code="WebBanking"/> </a>
     </div>
 </nav>
-<sec:authorize access="!isAuthenticated()">
+<sec:authorize access="!hasRole('ADMIN') and !isAuthenticated()">
     <c:redirect url="/"/>
 </sec:authorize>
-<sec:authorize access="isAuthenticated() and !hasRole('ADMIN')">
-
-
+<sec:authorize access="hasRole('ADMIN')">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -31,41 +29,33 @@
                     <li><a href="/logout"><i class="fa fa-bar-chart-o fa-fw"></i><spring:message code="Logout"/> </a></li>
                 </ul>
             </div>
-            <div id="result" class="col-md-6 well">
-                <c:if test="${!empty accountLists}">
+            <div  class="col-md-6 well">
+                <c:if test="${!empty usersList}">
                     <table data-toggle="table" class="table table h6">
                         <thead>
                         <tr>
-                            <th><spring:message code="Sum"/> </th>
-                            <th><spring:message code="Percentage"/> </th>
+                            <th><spring:message code="Login"/> </th>
                             <th><spring:message code="Type"/> </th>
-                            <th><spring:message code="DateOpen"/> </th>
-                            <th><spring:message code="Status"/> </th>
-                            <th><spring:message code="DateClose"/> </th>
-
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${accountLists}" var="account">
+                        <c:forEach items="${usersList}" var="user">
                             <tr id="tr-id-1" class="tr-class-1">
-                                <td>${account.sum}</td>
-                                <td>${account.percentage}</td>
-                                <td>${account.accountType}</td>
-                                <td>${account.date_of_open}</td>
-                                <td>${account.accountStatus}</td>
-                                <td>${account.date_of_close}</td>
-                                <td><a href="info/${account.id}"/><spring:message code="View"/> </td>
+                                <td>${user.login}</td>
+                                <td>${user.userType}</td>
+                                <td><a href="admin/info/${user.id}"/><spring:message code="Accounts"/> </td>
 
                             </tr>
                         </c:forEach>
+                        <button href="/newClient"><spring:message code="NewClient"/> </button>
                         </tbody>
                     </table>
                 </c:if>
+
             </div>
         </div>
     </div>
 </sec:authorize>
-
 <script src="/pages/js/bootstrap.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 </body>

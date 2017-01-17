@@ -1,9 +1,9 @@
 package ua.sdo.service;
 
-import ua.sdo.model.CreditPayment;
+import ua.sdo.model.payments.Payment;
 
 import java.util.List;
 
 public interface PaymentService {
-    List<CreditPayment> findByAccountId(int id);
+    List<Payment> findByAccountId(int id);
 }

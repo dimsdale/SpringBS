@@ -1,12 +1,13 @@
-package ua.sdo.model;
+package ua.sdo.model.payments;
 
 import ua.sdo.model.accounts.Account;
+import ua.sdo.model.payments.enums.TypePayment;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "credit_payments")
-public class CreditPayment {
+public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +17,21 @@ public class CreditPayment {
     @Column(name = "sum")
     private double sum;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "paymentType")
+    private TypePayment typePayment;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
+
+    public TypePayment getTypePayment() {
+        return typePayment;
+    }
+
+    public void setTypePayment(TypePayment typePayment) {
+        this.typePayment = typePayment;
+    }
 
     public double getSum() {
         return sum;

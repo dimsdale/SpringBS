@@ -1,6 +1,5 @@
 package ua.sdo.model.users;
 
-import ua.sdo.annotations.Unique;
 import ua.sdo.model.users.enums.UserType;
 
 import javax.persistence.*;
@@ -16,9 +15,8 @@ public abstract class User implements Serializable {
     @Column(name = "id")
     protected int id;
 
-    @Column(name = "login")
+    @Column(name = "login", unique = true)
     @Size(min = 4, max = 50)
-    @Unique
     protected String login;
 
     @Column(name = "password")

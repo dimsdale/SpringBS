@@ -1,7 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sspring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" language="java" %>
 
 <html>
 <head>
@@ -9,67 +11,57 @@
     <script src="/pages/js/bootstrap.min.js"></script>
     <link href="/pages/css/bootstrap.css"  rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <title>Registration</title>
-    <style>
-        .well  {margin-top: 240px; }
-        .error { color: red; font-size: 0.9em; font-weight: bold; }
-    </style>
+    <title><sspring:message code="Register"/> </title>
 </head>
 <body>
 <script>
 
 </script>
-<div class="container">
-    <div class="row">
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-                        <span class="sr-only">Open navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <%--<a class="navbar-brand" href="#">Company</a>--%>
-                </div>
-                <div class="collapse navbar-collapse" id="menu">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/login">Login</a> </li>
-                        <li><a href="#">About</a> </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+<nav class = "navbar navbar-default" role = "navigation">
+    <div class = "navbar-header">
+        <a class = "navbar-brand"><sspring:message code="WebBanking"/> </a>
     </div>
-</div>
+    <div>
+        <ul class = "nav navbar-nav">
+            <li><a href = "/enter"><sspring:message code="Login"/> </a></li>
+        </ul>
+    </div>
+</nav>
 <sec:authorize access="isAuthenticated()">
     <c:redirect url="/index"/>
 </sec:authorize>
 <sec:authorize access="!isAuthenticated()">
     <div class="container">
         <div class="row">
-            <div class="well span4 offset4">
-                <legend>Registration</legend>
-                <spring:form action="add" method="post" modelAttribute="user" acceptCharset="UTF-8">
-                            <spring:input path="login" id="login" placeholder="login" cssClass="span4"/>
+            <spring:form action="add" modelAttribute="user" class="form-horizontal">
+                <fieldset>
+                    <legend><sspring:message code="Register"/> </legend>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="login"><sspring:message code="Login"/> </label>
+                        <div class="col-md-4">
+                            <spring:input path="login" id="login" class="form-control input-md" type="text"/>
                             <spring:errors path="login" cssClass="alert alert-error" />
-                            <spring:input path="password" id="password" type="password"  placeholder="password"/>
-                            <spring:errors path="password" cssClass="alert alert-error" />
-                            <spring:input path="confirmPassword" id="confirmPassword" type="password"  placeholder="Confirm Password"/>
-                            <spring:errors path="confirmPassword" cssClass="alert alert-error" />
-                            <spring:input path="fio" id="fio" placeholder="Name, surname, fathername"/>
-                            <spring:errors path="fio" cssClass="alert alert-error" />
-                            <input type="submit" id="submitUser" value="Register" class="btn btn-block btn-success">
-                       </spring:form>
-            </div>
-        </div>
-    </div>
+                        </div>
+                    </div>
 
-    <div class="navbar-fixed-bottom row-fluid">
-        <div class="navbar-inner">
-            <div class="container text-center">
-                @Dmitriy Smirnov 2016
-            </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="password"><sspring:message code="Password"/> </label>
+                        <div class="col-md-4">
+                            <spring:input path="password" id="password" type="password" class="form-control input-md" />
+                            <spring:errors path="password" cssClass="alert alert-error" />
+                            <span class="help-block"> </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="submit"> </label>
+                        <div class="col-md-4">
+                            <input type="submit" id="submit" class="btn btn-primary" value=<sspring:message code="Register"/>> </input>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </spring:form>
+
         </div>
     </div>
 </sec:authorize>

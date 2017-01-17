@@ -17,10 +17,10 @@
         <a class = "navbar-brand"><spring:message code="WebBanking"/> </a>
     </div>
 </nav>
-<sec:authorize access="!isAuthenticated()">
+<sec:authorize access="!hasRole('ADMIN')">
     <c:redirect url="/"/>
 </sec:authorize>
-<sec:authorize access="isAuthenticated() and !hasRole('ADMIN')">
+<sec:authorize access="hasRole('ADMIN')">
 
 
     <div class="container">
@@ -54,10 +54,12 @@
                                 <td>${account.date_of_open}</td>
                                 <td>${account.accountStatus}</td>
                                 <td>${account.date_of_close}</td>
+                                <td><a href="pay"><spring:message code="NewPay"/> </a> </td>
                                 <td><a href="info/${account.id}"/><spring:message code="View"/> </td>
 
                             </tr>
                         </c:forEach>
+                        <button href="/newAccount"><spring:message code="NewAccount"/> </button>
                         </tbody>
                     </table>
                 </c:if>

@@ -28,10 +28,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("admin").password("admin").roles(UserType.ADMIN.name());
         auth.inMemoryAuthentication().withUser("client").password("client").roles(UserType.CLIENT.name());
+
     }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.csrf()
                 .disable()
                 .authorizeRequests()
@@ -41,10 +44,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and();
 
+
+
         http.formLogin()
-                .loginPage("/login")
                 .loginProcessingUrl("/j_spring_security_check")
-                .failureUrl("/login?error=invalidLoginOrPassword")
+                .defaultSuccessUrl("/")
+                .failureUrl("/enter?error=invalidLoginOrPassword")
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
                 .permitAll();
@@ -52,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout()
                 .permitAll()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
 
 

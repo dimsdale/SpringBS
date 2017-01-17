@@ -25,4 +25,5 @@ public class Client extends User {
     public void setAccounts(Set<Account> accounts) {
         this.accounts = accounts;
     }
+
 }

@@ -7,10 +7,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ua.sdo.model.users.User;
+import ua.sdo.model.users.enums.UserType;
 import ua.sdo.repository.UserRepository;
 import ua.sdo.service.UserService;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -31,6 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(User user) {
+        user.setUserType(UserType.CLIENT);
         userRepository.saveAndFlush(user);
     }
 
@@ -47,5 +50,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updatePassword(String password, int id) {
         userRepository.updatePassword(password, id);
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 }

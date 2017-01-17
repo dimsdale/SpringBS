@@ -8,41 +8,35 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Main</title>
+    <title><spring:message code="WebBanking"/> </title>
     <link href="/pages/css/bootstrap.css"  rel="stylesheet">
 </head>
 <body>
+<sec:authorize access="hasRole('ADMIN')">
+    <c:redirect url="/admin"/>
+</sec:authorize>
 <sec:authorize access="isAuthenticated()">
     <c:redirect url="/index"/>
 </sec:authorize>
+<nav class = "navbar navbar-default" role = "navigation">
 
-<div class="container">
-    <div class="row">
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
-                        <span class="sr-only">Open navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+<div class = "navbar-header">
+    <a class = "navbar-brand"><spring:message code="WebBanking"/> </a>
+</div>
 
-                </div>
-                <div class="collapse navbar-collapse" id="menu">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/register"><spring:message code="Register"/></a> </li>
-                        <li><a href="/login"><spring:message code="Login"/> </a> </li>
-                    </ul>
-                </div>
-            </div>
+<div>
+    <ul class = "nav navbar-nav">
+        <li><a href = "/enter"><spring:message code="Login"/> </a></li>
+        <li><a href = "/register"><spring:message code="Register"/> </a></li>
+    </ul>
+</div>
+</nav>
+<div class="navbar-fixed-bottom row-fluid">
+    <div class="navbar-inner">
+        <div class="container text-center">
+            <spring:message code="Welcome"/>
         </div>
     </div>
-</div>
-<div class="container">
-    <header>
-        <h1><spring:message code="Welcome"/> </h1>
-    </header>
 </div>
 <div class="navbar-fixed-bottom row-fluid">
     <div class="navbar-inner">

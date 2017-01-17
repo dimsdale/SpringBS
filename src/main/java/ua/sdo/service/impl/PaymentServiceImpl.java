@@ -2,7 +2,7 @@ package ua.sdo.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.sdo.model.CreditPayment;
+import ua.sdo.model.payments.Payment;
 import ua.sdo.repository.PaymentRepository;
 import ua.sdo.service.PaymentService;
 
@@ -14,7 +14,7 @@ public class PaymentServiceImpl implements PaymentService {
     private PaymentRepository paymentRepository;
 
     @Override
-    public List<CreditPayment> findByAccountId(int id) {
+    public List<Payment> findByAccountId(int id) {
         return paymentRepository.findByAccountId(id);
     }
 }

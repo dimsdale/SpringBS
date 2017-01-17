@@ -11,51 +11,38 @@
     <link href="/pages/css/bootstrap.css"  rel="stylesheet">
 </head>
 <body>
-<nav class = "navbar navbar-default" role = "navigation">
-
-    <div class = "navbar-header">
-        <a class = "navbar-brand"><spring:message code="WebBanking"/> </a>
-    </div>
-</nav>
 <sec:authorize access="!isAuthenticated()">
     <c:redirect url="/"/>
 </sec:authorize>
-<sec:authorize access="isAuthenticated() and !hasRole('ADMIN')">
+<sec:authorize access="hasRole('CLIENT')">
+    <nav class = "navbar navbar-default" role = "navigation">
 
-
+        <div class = "navbar-header">
+            <a class = "navbar-brand"><spring:message code="WebBanking"/> </a>
+        </div>
+    </nav>
     <div class="container">
         <div class="row">
             <div class="col-md-3">
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active" ><a href="#" ><i class="fa fa-home fa-fw"></i><spring:message code="Clients"/> </a></li>
+                    <li class="active" ><a href="#" ><i class="fa fa-home fa-fw"></i><spring:message code="MainInfo"/> </a></li>
                     <li><a href="/logout"><i class="fa fa-bar-chart-o fa-fw"></i><spring:message code="Logout"/> </a></li>
                 </ul>
             </div>
-            <div id="result" class="col-md-6 well">
-                <c:if test="${!empty accountLists}">
-                    <table data-toggle="table" class="table table h6">
+            <div id="result" class="col-md-5 well">
+                <c:if test="${!empty payments}">
+                    <table data-toggle="table" class="table table h5">
                         <thead>
                         <tr>
+                            <th><spring:message code="Id"/> </th>
                             <th><spring:message code="Sum"/> </th>
-                            <th><spring:message code="Percentage"/> </th>
-                            <th><spring:message code="Type"/> </th>
-                            <th><spring:message code="DateOpen"/> </th>
-                            <th><spring:message code="Status"/> </th>
-                            <th><spring:message code="DateClose"/> </th>
-
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${accountLists}" var="account">
+                        <c:forEach items="${payments}" var="payment">
                             <tr id="tr-id-1" class="tr-class-1">
+                                <td>${account.id}</td>
                                 <td>${account.sum}</td>
-                                <td>${account.percentage}</td>
-                                <td>${account.accountType}</td>
-                                <td>${account.date_of_open}</td>
-                                <td>${account.accountStatus}</td>
-                                <td>${account.date_of_close}</td>
-                                <td><a href="info/${account.id}"/><spring:message code="View"/> </td>
-
                             </tr>
                         </c:forEach>
                         </tbody>

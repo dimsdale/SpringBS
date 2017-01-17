@@ -1,6 +1,6 @@
 package ua.sdo.model.accounts;
 
-import ua.sdo.model.CreditPayment;
+import ua.sdo.model.payments.Payment;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -13,18 +13,18 @@ import java.util.Set;
 public class CreditAccount extends Account {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
-    private Set<CreditPayment> creditPayments;
+    private Set<Payment> payments;
 
     public CreditAccount() {
         this.percentage = 7;
     }
 
-    public Set<CreditPayment> getCreditPayments() {
-        return creditPayments;
+    public Set<Payment> getPayments() {
+        return payments;
     }
 
-    public void setCreditPayments(Set<CreditPayment> creditPayments) {
-        this.creditPayments = creditPayments;
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
     }
 
 }

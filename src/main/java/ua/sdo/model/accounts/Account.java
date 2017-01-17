@@ -1,5 +1,6 @@
 package ua.sdo.model.accounts;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.Type;
 import ua.sdo.model.accounts.enums.AccountStatus;
 import ua.sdo.model.accounts.enums.AccountType;
@@ -22,6 +23,7 @@ public abstract class Account {
 
     @Column(name = "date_of_open")
     @Type(type = "timestamp")
+    @JsonFormat(pattern="yyyy-MM-dd")
     protected Date date_of_open;
 
     @Column(name = "percentage", nullable = false)
