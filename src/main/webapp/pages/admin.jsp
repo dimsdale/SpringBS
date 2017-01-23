@@ -17,15 +17,15 @@
         <a class = "navbar-brand"><spring:message code="WebBanking"/> </a>
     </div>
 </nav>
-<sec:authorize access="!hasRole('ADMIN') or !isAuthenticated()">
+<sec:authorize access="!hasRole('ROLE_ADMIN') or !isAuthenticated()">
     <c:redirect url="/"/>
 </sec:authorize>
-<sec:authorize access="hasRole('ADMIN')">
+<sec:authorize access="hasRole('ROLE_ADMIN')">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active" ><a href="#" ><i class="fa fa-home fa-fw"></i><spring:message code="Clients"/> </a></li>
+                    <li class="active" ><a><i class="fa fa-home fa-fw"></i><spring:message code="Clients"/> </a></li>
                     <li><a href="/logout"><i class="fa fa-bar-chart-o fa-fw"></i><spring:message code="Logout"/> </a></li>
                 </ul>
             </div>

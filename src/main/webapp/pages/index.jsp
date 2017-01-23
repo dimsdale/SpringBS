@@ -12,9 +12,7 @@
     <link href="/pages/css/bootstrap.css"  rel="stylesheet">
 </head>
 <body>
-<sec:authorize access="hasRole('ADMIN')">
-    <c:redirect url="/admin"/>
-</sec:authorize>
+
 <sec:authorize access="isAuthenticated()">
     <c:redirect url="/index"/>
 </sec:authorize>

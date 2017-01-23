@@ -20,11 +20,11 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public void addPay(Payment payment) {
-        paymentRepository.saveAndFlush(payment);
+        paymentRepository.save(payment);
     }
 
     @Override
     public void createPayment(int id, Payment payment) {
-        paymentRepository.createPayment(id, payment);
+        paymentRepository.createPayment(id, payment.getSum(), payment.getId());
     }
 }

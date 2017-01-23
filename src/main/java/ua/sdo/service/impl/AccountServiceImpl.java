@@ -19,8 +19,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Account> findById(int id) {
-        return accountRepository.findById(id);
+    public List<Account> findByIdClient(int id) {
+        return accountRepository.findByIdClient(id);
+    }
+
+    @Override
+    public Account getById(int id) {
+        return accountRepository.getOne(id);
     }
 
     @Override

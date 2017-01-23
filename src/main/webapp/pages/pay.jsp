@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="sspring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="springUtils" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -12,55 +11,52 @@
     <script src="/pages/js/bootstrap.min.js"></script>
     <link href="/pages/css/bootstrap.css"  rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <title><sspring:message code="Register"/> </title>
+    <title><springUtils:message code="Register"/> </title>
 </head>
 <body>
 <nav class = "navbar navbar-default" role = "navigation">
     <div class = "navbar-header">
-        <a class = "navbar-brand"><sspring:message code="WebBanking"/> </a>
-    </div>
-    <div>
-        <ul class = "nav navbar-nav">
-            <li><a href = "/enter"><sspring:message code="Login"/> </a></li>
-        </ul>
+        <a class = "navbar-brand"><springUtils:message code="WebBanking"/> </a>
     </div>
 </nav>
-<sec:authorize access="!hasRole('ADMIN') or !isAuthenticated()">
+<sec:authorize access="!hasRole('ROLE_ADMIN') or !isAuthenticated()">
     <c:redirect url="/"/>
 </sec:authorize>
-<sec:authorize access="hasRole('ADMIN')">
+<sec:authorize access="hasRole('ROLE_ADMIN')">
     <div class="container">
         <div class="row">
-            <spring:form action="/admin/payAdd" modelAttribute="payment" class="form-horizontal">
+            <form:form action="/admin/pay" modelAttribute="payment" class="form-horizontal">
                 <fieldset>
-                    <legend><sspring:message code="Register"/> </legend>
+                    <legend><springUtils:message code="NewPay"/> </legend>
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="sum"><sspring:message code="Login"/> </label>
+                        <label class="col-md-4 control-label" for="sum"><springUtils:message code="Sum"/> </label>
                         <div class="col-md-4">
-                            <spring:input path="sum" id="sum" class="form-control input-md" type="text"/>
-                            <spring:errors path="sum" cssClass="alert alert-error" />
+                            <form:input path="sum" id="sum" class="form-control input-md" type="text"/>
+                            <form:errors path="sum" cssClass="alert alert-error" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="type"><sspring:message code="Password"/> </label>
+                        <label class="col-md-4 control-label" for="type"><springUtils:message code="Type"/> </label>
                         <div class="col-md-4">
-                            <spring:select path="type" id="type">
-                                <spring:option value="NONE" label=""/>
-                                <spring:options items="${types}"/>
-                            </spring:select>
+                            <form:select path="type" id="type">
+                                <form:option value="NONE"/>
+                                <c:forEach items="${typesPayment}" var="type">
+                                    <form:option value="${type}" label="${type.name}"/>
+                                </c:forEach>
+                            </form:select>
                             <span class="help-block"> </span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="submit"> </label>
                         <div class="col-md-4">
-                            <input type="submit" id="submit" class="btn btn-primary" value=<sspring:message code="Send"/>> </input>
+                            <input type="submit" id="submit" class="btn btn-primary" value=<springUtils:message code="Send"/>> </input>
                         </div>
                     </div>
 
                 </fieldset>
-            </spring:form>
+            </form:form>
 
         </div>
     </div>

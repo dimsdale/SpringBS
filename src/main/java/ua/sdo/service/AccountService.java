@@ -9,7 +9,8 @@ public interface AccountService {
 
 
     List<Account> findByLogin(String login);
-    List<Account> findById(int id);
+    List<Account> findByIdClient(int id);
+    Account getById(int id);
     void updateSumAccount(double sum, int id);
     void closeAccount(int id);
 

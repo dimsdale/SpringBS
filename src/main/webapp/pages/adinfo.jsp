@@ -17,10 +17,10 @@
         <a class = "navbar-brand"><spring:message code="WebBanking"/> </a>
     </div>
 </nav>
-<sec:authorize access="!hasRole('ADMIN')">
+<sec:authorize access="!hasRole('ROLE_ADMIN')">
     <c:redirect url="/"/>
 </sec:authorize>
-<sec:authorize access="hasRole('ADMIN')">
+<sec:authorize access="hasRole('ROLE_ADMIN')">
 
 
     <div class="container">
@@ -50,11 +50,11 @@
                             <tr id="tr-id-1" class="tr-class-1">
                                 <td>${account.sum}</td>
                                 <td>${account.percentage}</td>
-                                <td>${account.accountType}</td>
+                                <td>${account.accountType.name}</td>
                                 <td>${account.date_of_open}</td>
-                                <td>${account.accountStatus}</td>
+                                <td>${account.accountStatus.name}</td>
                                 <td>${account.date_of_close}</td>
-                                <c:if test="${account.accountType eq 'Credit'}">
+                                <c:if test="${account.accountType.name eq 'Credit'}">
                                     <td><a href="/admin/pay/${account.id}"><spring:message code="NewPay"/>
                                  </a> </td>
                                 </c:if>

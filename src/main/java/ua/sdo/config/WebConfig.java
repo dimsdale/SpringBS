@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.LocaleResolver;
@@ -44,6 +45,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         interceptor.setParamName("mylocale");
         registry.addInterceptor(interceptor);
     }
+
 
     @Bean
     public LocaleResolver localeResolver() {

@@ -47,7 +47,7 @@ public class MainController {
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String mainPage(Model model, Locale locale){
         List<Account> accounts = accountService.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute("accountLists", accounts);
+        model.addAttribute("accountsList", accounts);
         return "main";
     }
     @RequestMapping(value = "/enter", method = RequestMethod.GET)
@@ -78,7 +78,7 @@ public class MainController {
             return "register";
         }
         userService.createUser(user);
-        securityService.logIn(user.getLogin(), user.getPassword());
+//        securityService.logIn(user.getLogin(), user.getPassword());
         return "redirect:/index";
     }
 }

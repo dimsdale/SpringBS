@@ -16,7 +16,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     List<Account> findByLogin(@Param("login") String login);
 
     @Query("select c from Account c where c.user.id = :id")
-    List<Account> findById(@Param("id") int id);
+    List<Account> findByIdClient(@Param("id") int id);
 
     @Modifying
     @Query("update Account a set a.sum = a.sum - :money  where a.id = :id")

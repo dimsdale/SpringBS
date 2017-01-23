@@ -14,7 +14,7 @@
 <sec:authorize access="!isAuthenticated()">
     <c:redirect url="/"/>
 </sec:authorize>
-<sec:authorize access="isAuthenticated()">
+<sec:authorize access="hasRole('ROLE_USER')">
     <nav class = "navbar navbar-default" role = "navigation">
 
         <div class = "navbar-header">

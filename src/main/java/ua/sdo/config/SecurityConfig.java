@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -18,10 +19,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
     public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
 
     }
+
 
 
     @Override
@@ -35,12 +40,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and();
 
-
-
         http.formLogin()
+                .usernameParameter("login")
+                .passwordParameter("password")
                 .loginProcessingUrl("/j_spring_security_check")
                 .defaultSuccessUrl("/")
-                .failureUrl("/enter?error=invalidLoginOrPassword")
+                .failureUrl("/enter")
+                .loginPage("/enter")
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
                 .permitAll();

@@ -20,19 +20,22 @@
 <sec:authorize access="!isAuthenticated()">
     <c:redirect url="/"/>
 </sec:authorize>
-<sec:authorize access="isAuthenticated() and !hasRole('ADMIN')">
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+    <c:redirect url="/admin"/>
+</sec:authorize>
+<sec:authorize access="hasRole('ROLE_USER')">
 
 
     <div class="container">
         <div class="row">
             <div class="col-md-3">
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active" ><a href="#" ><i class="fa fa-home fa-fw"></i><spring:message code="Clients"/> </a></li>
+                    <li class="active" ><a href="#" ><i class="fa fa-home fa-fw"></i><spring:message code="Accounts"/> </a></li>
                     <li><a href="/logout"><i class="fa fa-bar-chart-o fa-fw"></i><spring:message code="Logout"/> </a></li>
                 </ul>
             </div>
             <div id="result" class="col-md-6 well">
-                <c:if test="${!empty accountLists}">
+                <c:if test="${!empty accountsList}">
                     <table data-toggle="table" class="table table h6">
                         <thead>
                         <tr>
@@ -46,13 +49,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${accountLists}" var="account">
+                        <c:forEach items="${accountsList}" var="account">
                             <tr id="tr-id-1" class="tr-class-1">
                                 <td>${account.sum}</td>
                                 <td>${account.percentage}</td>
-                                <td>${account.accountType}</td>
+                                <td>${account.accountType.name}</td>
                                 <td>${account.date_of_open}</td>
-                                <td>${account.accountStatus}</td>
+                                <td>${account.accountStatus.name}</td>
                                 <td>${account.date_of_close}</td>
                                 <td><a href="info/${account.id}"/><spring:message code="View"/> </td>
 

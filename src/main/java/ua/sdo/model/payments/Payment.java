@@ -26,7 +26,7 @@ public class Payment {
     @Type(type = "timestamp")
     private Date date_of_payment;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
