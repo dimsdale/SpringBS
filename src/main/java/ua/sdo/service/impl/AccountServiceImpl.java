@@ -3,7 +3,6 @@ package ua.sdo.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.sdo.model.accounts.Account;
-import ua.sdo.model.accounts.enums.AccountStatus;
 import ua.sdo.repository.AccountRepository;
 import ua.sdo.service.AccountService;
 
@@ -20,13 +19,18 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public List<Account> findById(int id) {
+        return accountRepository.findById(id);
+    }
+
+    @Override
     public void updateSumAccount(double sum, int id) {
         accountRepository.updateSumAccount(sum, id);
     }
 
     @Override
-    public void closeAccount(AccountStatus accountStatus, int id) {
-        accountRepository.closeAccount(accountStatus, id);
+    public void closeAccount(int id) {
+        accountRepository.closeAccount(id);
     }
 
 }

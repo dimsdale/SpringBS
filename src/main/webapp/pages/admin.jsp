@@ -17,7 +17,7 @@
         <a class = "navbar-brand"><spring:message code="WebBanking"/> </a>
     </div>
 </nav>
-<sec:authorize access="!hasRole('ADMIN') and !isAuthenticated()">
+<sec:authorize access="!hasRole('ADMIN') or !isAuthenticated()">
     <c:redirect url="/"/>
 </sec:authorize>
 <sec:authorize access="hasRole('ADMIN')">
@@ -35,14 +35,12 @@
                         <thead>
                         <tr>
                             <th><spring:message code="Login"/> </th>
-                            <th><spring:message code="Type"/> </th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${usersList}" var="user">
                             <tr id="tr-id-1" class="tr-class-1">
                                 <td>${user.login}</td>
-                                <td>${user.userType}</td>
                                 <td><a href="admin/info/${user.id}"/><spring:message code="Accounts"/> </td>
 
                             </tr>

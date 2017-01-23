@@ -14,7 +14,7 @@
 <sec:authorize access="!isAuthenticated()">
     <c:redirect url="/"/>
 </sec:authorize>
-<sec:authorize access="hasRole('CLIENT')">
+<sec:authorize access="isAuthenticated()">
     <nav class = "navbar navbar-default" role = "navigation">
 
         <div class = "navbar-header">
@@ -36,13 +36,17 @@
                         <tr>
                             <th><spring:message code="Id"/> </th>
                             <th><spring:message code="Sum"/> </th>
+                            <th><spring:message code="DatePay"/> </th>
+                            <th><spring:message code="Type"/> </th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${payments}" var="payment">
                             <tr id="tr-id-1" class="tr-class-1">
-                                <td>${account.id}</td>
-                                <td>${account.sum}</td>
+                                <td>${payment.id}</td>
+                                <td>${payment.sum}</td>
+                                <td>${payment.date_of_payment}</td>
+                                <td>${payment.type}</td>
                             </tr>
                         </c:forEach>
                         </tbody>

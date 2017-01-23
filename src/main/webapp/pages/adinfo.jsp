@@ -54,15 +54,18 @@
                                 <td>${account.date_of_open}</td>
                                 <td>${account.accountStatus}</td>
                                 <td>${account.date_of_close}</td>
-                                <td><a href="pay"><spring:message code="NewPay"/> </a> </td>
-                                <td><a href="info/${account.id}"/><spring:message code="View"/> </td>
+                                <c:if test="${account.accountType eq 'Credit'}">
+                                    <td><a href="/admin/pay/${account.id}"><spring:message code="NewPay"/>
+                                 </a> </td>
+                                </c:if>
+                                <td><a href="/admin/payments/${account.id}"/><spring:message code="View"/> </td>
 
                             </tr>
                         </c:forEach>
-                        <button href="/newAccount"><spring:message code="NewAccount"/> </button>
                         </tbody>
                     </table>
                 </c:if>
+                <button href="/newAccount"><spring:message code="NewAccount"/> </button>
             </div>
         </div>
     </div>

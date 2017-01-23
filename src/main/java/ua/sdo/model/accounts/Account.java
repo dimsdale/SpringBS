@@ -1,49 +1,59 @@
 package ua.sdo.model.accounts;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.Type;
-import ua.sdo.model.accounts.enums.AccountStatus;
-import ua.sdo.model.accounts.enums.AccountType;
+import ua.sdo.model.payments.Payment;
 import ua.sdo.model.users.User;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
-@Inheritance
+
 @Entity
-public abstract class Account {
+@Table(name = "account")
+public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    protected int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private int id;
 
     @Column(name = "Sum", nullable = false)
-    protected volatile double sum;
+    private volatile double sum;
 
     @Column(name = "date_of_open")
     @Type(type = "timestamp")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    protected Date date_of_open;
+    private Date date_of_open;
 
     @Column(name = "percentage", nullable = false)
-    protected int percentage;
+    private int percentage;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "account_status")
-    protected AccountStatus accountStatus;
+    @ManyToOne
+    @JoinColumn(name = "account_status_id")
+    private AccountStatus accountStatus;
 
     @Column(name = "date_close")
     @Type(type = "date")
-    protected Date date_of_close;
+    private Date date_of_close;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "accountType")
-    protected AccountType accountType;
+    @ManyToOne
+    @JoinColumn(name = "account_type_id")
+    private AccountType accountType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    protected User user;
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
+    private Set<Payment> payments;
+
+    public Set<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
+    }
 
     public Account() {
 

@@ -6,14 +6,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ua.sdo.model.users.User;
-@Repository
+
+import java.util.List;
+
+@Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("select u from User u where u.login = :login")
     User findByName(@Param("login") String login);
 
-    @Query("select count(u) from  User u where u.login = :login")
-    int countUserByLogin(@Param("login") String login);
+    @Query("SELECT u from User u where u.role.id = 1")
+    List<User> getAllClients();
 
     @Modifying
     @Query("update User u  set  u.login = :login  where u.id = :id ")

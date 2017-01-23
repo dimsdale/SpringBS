@@ -1,19 +1,14 @@
 package ua.sdo.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.sdo.model.users.User;
-import ua.sdo.model.users.enums.UserType;
+import ua.sdo.repository.RoleRepository;
 import ua.sdo.repository.UserRepository;
 import ua.sdo.service.UserService;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -21,20 +16,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = findByName(s);
-        if (user == null) throw new UsernameNotFoundException("User with username " + s + " not found");
-        Set<GrantedAuthority> roles = new HashSet();
-        roles.add(new SimpleGrantedAuthority(user.getUserType().name()));
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), roles);
-        return userDetails;
-    }
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public void createUser(User user) {
-        user.setUserType(UserType.CLIENT);
-        userRepository.saveAndFlush(user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(roleRepository.getOne(1));
+        userRepository.save(user);
     }
 
     @Override
@@ -55,5 +47,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<User> getAllClients() {
+        return userRepository.getAllClients();
     }
 }

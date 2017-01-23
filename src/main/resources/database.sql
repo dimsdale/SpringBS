@@ -1,0 +1,10 @@
+INSERT INTO roles VALUES (1, 'ROLE_USER');
+INSERT INTO roles VALUES (2, 'ROLE_ADMIN');
+INSERT INTO user VALUES (1, 'admin','password', 2);
+INSERT INTO account_status VALUES (1, 'Open');
+INSERT INTO account_status VALUES (2, 'Close');
+INSERT INTO account_type VALUES (1, 'Credit');
+INSERT INTO account_type VALUES (2, 'Deposit');
+INSERT INTO type_payment VALUES (1, 'EveryMonth Calculate By Percent');
+INSERT INTO type_payment VALUES (2, 'Additional');
+INSERT INTO type_payment VALUES (3, 'Withdrawal');

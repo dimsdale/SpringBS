@@ -15,9 +15,9 @@ public class CreditAccount extends Account {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
     private Set<Payment> payments;
 
-    public CreditAccount() {
-        this.percentage = 7;
-    }
+//    public CreditAccount() {
+//        this.percentage = 7;
+//    }
 
     public Set<Payment> getPayments() {
         return payments;

@@ -1,34 +1,48 @@
 package ua.sdo.model.users;
 
-import ua.sdo.model.users.enums.UserType;
+import ua.sdo.model.Role;
+import ua.sdo.model.accounts.Account;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
+import java.util.Set;
 
-@Inheritance
+
 @Entity
-public abstract class User implements Serializable {
+@Table(name = "user")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    protected int id;
+    private int id;
 
     @Column(name = "login", unique = true)
-    @Size(min = 4, max = 50)
-    protected String login;
+    private String login;
 
     @Column(name = "password")
-    @Size(min = 4, max = 50)
-    protected String password;
+    private String password;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "user_type")
-    protected UserType userType;
+    @Transient
+    private String confirmPassword;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<Account> accounts;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     public User() {
     }
+
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
+    }
+
 
     public int getId() {
         return id;
@@ -54,11 +68,19 @@ public abstract class User implements Serializable {
         this.password = password;
     }
 
-    public UserType getUserType() {
-        return userType;
+    public Role getRole() {
+        return role;
     }
 
-    public void setUserType(UserType userType) {
-        this.userType = userType;
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

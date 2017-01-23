@@ -1,7 +1,6 @@
 package ua.sdo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,32 +10,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ua.sdo.model.accounts.Account;
-import ua.sdo.model.accounts.DepositAccount;
 import ua.sdo.model.payments.Payment;
-import ua.sdo.model.users.Client;
 import ua.sdo.model.users.User;
-import ua.sdo.model.users.enums.UserType;
 import ua.sdo.service.AccountService;
 import ua.sdo.service.PaymentService;
+import ua.sdo.service.SecurityService;
 import ua.sdo.service.UserService;
+import ua.sdo.validator.UserValidator;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Locale;
 
 @Controller
-public class ClientController extends AbstractController {
+public class MainController {
 
-    @ModelAttribute("user")
-    public User emptyUser(){
-        return new Client();
-    }
+    @Autowired
+    protected UserService userService;
 
-    @ModelAttribute("account")
-    public Account emptyAccount(){
-        return new DepositAccount();
-    }
+    @Autowired
+    private SecurityService securityService;
 
+    @Autowired
+    private UserValidator validator;
+
+    @Autowired
+    protected AccountService accountService;
+
+    @Autowired
+    protected PaymentService paymentService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String start(Model model, Locale locale){
@@ -59,5 +60,25 @@ public class ClientController extends AbstractController {
         List<Payment> payments = paymentService.findByAccountId(id);
         model.addAttribute("payments", payments);
         return "info";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String registerPage(Model model, Locale locale){
+        model.addAttribute("user", new User());
+        return "register";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String addUser(@ModelAttribute("user") User user, BindingResult result)
+    {
+
+        validator.validate(user, result);
+        if (result.hasErrors())
+        {
+            return "register";
+        }
+        userService.createUser(user);
+        securityService.logIn(user.getLogin(), user.getPassword());
+        return "redirect:/index";
     }
 }

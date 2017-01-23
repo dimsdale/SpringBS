@@ -17,4 +17,14 @@ public class PaymentServiceImpl implements PaymentService {
     public List<Payment> findByAccountId(int id) {
         return paymentRepository.findByAccountId(id);
     }
+
+    @Override
+    public void addPay(Payment payment) {
+        paymentRepository.saveAndFlush(payment);
+    }
+
+    @Override
+    public void createPayment(int id, Payment payment) {
+        paymentRepository.createPayment(id, payment);
+    }
 }
