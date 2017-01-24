@@ -64,14 +64,14 @@
 #   CONSTRAINT `FK_qrd74219txw5drh316ia7g310` FOREIGN KEY (`type_id`) REFERENCES `type_payment` (`id`)
 # ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
-INSERT INTO roles VALUES (1, 'ROLE_USER');
-INSERT INTO roles VALUES (2, 'ROLE_ADMIN');
-INSERT INTO user VALUES (1, 'admin','password', 2);
-INSERT INTO account_status VALUES (1, 'Open');
-INSERT INTO account_status VALUES (2, 'Close');
-INSERT INTO account_type VALUES (1, 'Credit');
-INSERT INTO account_type VALUES (2, 'Deposit');
-INSERT INTO type_payment VALUES (1, 'EveryMonth Withdrawal  By Percent');
-INSERT INTO type_payment VALUES (2, 'EveryMonth Additional');
-INSERT INTO type_payment VALUES (3, 'EveryMonth Payment On Credit Account');
-
+# INSERT INTO roles VALUES (1, 'ROLE_USER');
+# INSERT INTO roles VALUES (2, 'ROLE_ADMIN');
+# INSERT INTO user VALUES (1, 'admin','password', 2);
+# INSERT INTO account_status VALUES (1, 'Open');
+# INSERT INTO account_status VALUES (2, 'Close');
+# INSERT INTO account_type VALUES (1, 'Credit');
+# INSERT INTO account_type VALUES (2, 'Deposit');
+# INSERT INTO type_payment VALUES (1, 'EveryMonth Withdrawal  By Percent');
+# INSERT INTO type_payment VALUES (2, 'EveryMonth Additional');
+# INSERT INTO type_payment VALUES (3, 'EveryMonth Payment On Credit Account');
+#
