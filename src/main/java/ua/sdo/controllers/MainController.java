@@ -14,7 +14,6 @@ import ua.sdo.model.payments.Payment;
 import ua.sdo.model.users.User;
 import ua.sdo.service.AccountService;
 import ua.sdo.service.PaymentService;
-import ua.sdo.service.SecurityService;
 import ua.sdo.service.UserService;
 import ua.sdo.validator.UserValidator;
 
@@ -26,9 +25,6 @@ public class MainController {
 
     @Autowired
     protected UserService userService;
-
-    @Autowired
-    private SecurityService securityService;
 
     @Autowired
     private UserValidator validator;
@@ -78,7 +74,6 @@ public class MainController {
             return "register";
         }
         userService.createUser(user);
-//        securityService.logIn(user.getLogin(), user.getPassword());
         return "redirect:/index";
     }
 }

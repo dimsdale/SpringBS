@@ -19,10 +19,10 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
     List<Account> findByIdClient(@Param("id") int id);
 
     @Modifying
-    @Query("update Account a set a.sum = a.sum - :money  where a.id = :id")
+    @Query("update Account a set a.sum = :money  where a.id = :id")
     void updateSumAccount(@Param("money") double money, @Param("id") int id);
 
     @Modifying
-    @Query("update Account a set a.date_of_close = current_timestamp , a.accountStatus.id = 2, a.sum = 0 where a.id = :id and a.sum = 0")
+    @Query("update Account a set a.date_of_close = current_date , a.accountStatus.id = 2, a.sum = 0.0, a.term_of_credit = 0, a.everymonthPayment = 0 where a.id = :id")
     void closeAccount(@Param("id") int id);
 }

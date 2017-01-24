@@ -11,7 +11,7 @@
     <script src="/pages/js/bootstrap.min.js"></script>
     <link href="/pages/css/bootstrap.css"  rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <title><springUtils:message code="NewPay"/> </title>
+    <title><springUtils:message code="Register"/> </title>
 </head>
 <body>
 <nav class = "navbar navbar-default" role = "navigation">
@@ -25,9 +25,9 @@
 <sec:authorize access="hasRole('ROLE_ADMIN')">
     <div class="container">
         <div class="row">
-            <form:form action="/admin/pay" modelAttribute="payment" class="form-horizontal">
+            <form:form action="/admin/save" modelAttribute="account" class="form-horizontal">
                 <fieldset>
-                    <legend><springUtils:message code="NewPay"/> </legend>
+                    <legend><springUtils:message code="NewAccount"/> </legend>
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="sum"><springUtils:message code="Sum"/> </label>
                         <div class="col-md-4">
@@ -37,11 +37,24 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="col-md-4 control-label" for="type"><springUtils:message code="Term"/> </label>
+                        <div class="col-md-4">
+                            <form:select path="term_of_credit" id="type">
+                                <form:option value="6" />
+                                <form:option value="12"/>
+                                <form:option value="24"/>
+                                <form:option value="36"/>
+                                <form:option value="48"/>
+                                <form:option value="60"/>
+                            </form:select>
+                            <span class="help-block"> </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-md-4 control-label" for="type"><springUtils:message code="Type"/> </label>
                         <div class="col-md-4">
-                            <form:select path="type" id="type">
-                                <form:option value="NONE"/>
-                                <c:forEach items="${typesPayment}" var="type">
+                            <form:select path="accountType" id="type">
+                                <c:forEach items="${accountTypes}" var="type">
                                     <form:option value="${type}" label="${type.name}"/>
                                 </c:forEach>
                             </form:select>

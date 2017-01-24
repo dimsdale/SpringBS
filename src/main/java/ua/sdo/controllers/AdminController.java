@@ -8,20 +8,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ua.sdo.constants.Constant;
 import ua.sdo.model.accounts.Account;
 import ua.sdo.model.payments.Payment;
 import ua.sdo.model.users.User;
 import ua.sdo.repository.AccountStatusRepository;
 import ua.sdo.repository.AccountTypeRepository;
-import ua.sdo.repository.PaymentRepository;
 import ua.sdo.repository.TypePaymentRepository;
 import ua.sdo.service.AccountService;
 import ua.sdo.service.PaymentService;
 import ua.sdo.service.UserService;
+import ua.sdo.virpaymaster.Cashier;
 
 import javax.servlet.http.HttpSession;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -40,9 +39,6 @@ public class AdminController {
     private PaymentService paymentService;
 
     @Autowired
-    private PaymentRepository paymentRepository;
-
-    @Autowired
     private AccountStatusRepository accountStatusRepository;
 
     @Autowired
@@ -51,11 +47,8 @@ public class AdminController {
     @Autowired
     private TypePaymentRepository typePaymentRepository;
 
-    @ModelAttribute("account")
-    public Account emptyAccount(){
-        return new Account();
-    }
-
+    @Autowired
+    private Cashier cashier;
 
     @RequestMapping()
     public String mainAdminPage(Model model, Locale locale){
@@ -65,10 +58,34 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/info/{id}", method = RequestMethod.GET)
-    public String infoAboutClientPage(@PathVariable("id") Integer id, Model model, Locale locale){
+    public String infoAboutClientPage(@PathVariable("id") Integer id, Model model, Locale locale, HttpSession session){
         List<Account> accounts = accountService.findByIdClient(id);
+        session.setAttribute("idClient", id);
         model.addAttribute("accountLists", accounts);
         return "adinfo";
+    }
+
+    @RequestMapping(value = "/newAccount", method = RequestMethod.GET)
+    public String newAccountPage(Model model, Locale locale){
+        model.addAttribute("account", new Account());
+        model.addAttribute("accountTypes", accountTypeRepository.findAll());
+        return "newAccount";
+    }
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String saveAccount(@ModelAttribute("account") Account account, Model model, Locale locale, HttpSession httpSession){
+        model.addAttribute("account", new Account());
+        account.setAccountStatus(accountStatusRepository.getOne(Constant.ACCOUNT_STATUS_OPEN_ID));
+        if (account.getAccountType().getId() == Constant.ACCOUNT_TYPE_CREDIT_ID){
+            account.setPercentage(Constant.PERCENTAGE_FOR_CREDIT);
+            account.setEverymonthPayment(Math.ceil(((account.getSum() * account.getPercentage()/ 100) + account.getSum()) / account.getTerm_of_credit()));
+        } else {
+            account.setPercentage(Constant.PERCENTAGE_FOR_DEPOSIT);
+        }
+        account.setUser(userService.getByIdUser((Integer) httpSession.getAttribute("idClient")));
+        account.setDate_of_open(new Date());
+        accountService.createAccount(account);
+        return "redirect:/admin";
     }
 
     @RequestMapping(value = "/pay/{id}", method = RequestMethod.GET)
@@ -85,7 +102,9 @@ public class AdminController {
         Account account = accountService.getById(accId);
         payment.setAccount(account);
         payment.setDate_of_payment(new Date());
-        paymentRepository.save(payment);
+        paymentService.addPay(payment);
+        cashier.submitPaymentToAccount(account, payment);
+
         return "redirect:/admin";
     }
 

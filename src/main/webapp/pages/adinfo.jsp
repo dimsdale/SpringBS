@@ -27,11 +27,11 @@
         <div class="row">
             <div class="col-md-3">
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active" ><a href="#" ><i class="fa fa-home fa-fw"></i><spring:message code="Clients"/> </a></li>
+                    <li ><a href="/admin" ><i class="fa fa-home fa-fw"></i><spring:message code="Clients"/> </a></li>
                     <li><a href="/logout"><i class="fa fa-bar-chart-o fa-fw"></i><spring:message code="Logout"/> </a></li>
                 </ul>
             </div>
-            <div id="result" class="col-md-6 well">
+            <div id="result" class="col-md-9 well">
                 <c:if test="${!empty accountLists}">
                     <table data-toggle="table" class="table table h6">
                         <thead>
@@ -41,6 +41,8 @@
                             <th><spring:message code="Type"/> </th>
                             <th><spring:message code="DateOpen"/> </th>
                             <th><spring:message code="Status"/> </th>
+                            <th><spring:message code="Term"/> </th>
+                            <th><spring:message code="EveryMonthPayment"/> </th>
                             <th><spring:message code="DateClose"/> </th>
 
                         </tr>
@@ -53,8 +55,10 @@
                                 <td>${account.accountType.name}</td>
                                 <td>${account.date_of_open}</td>
                                 <td>${account.accountStatus.name}</td>
+                                <td>${account.term_of_credit}</td>
+                                <td>${account.everymonthPayment}</td>
                                 <td>${account.date_of_close}</td>
-                                <c:if test="${account.accountType.name eq 'Credit'}">
+                                <c:if test="${ account.accountStatus.id eq 1 and account.accountType.id eq 1}">
                                     <td><a href="/admin/pay/${account.id}"><spring:message code="NewPay"/>
                                  </a> </td>
                                 </c:if>
@@ -65,7 +69,7 @@
                         </tbody>
                     </table>
                 </c:if>
-                <button href="/newAccount"><spring:message code="NewAccount"/> </button>
+                <a href="/admin/newAccount"><spring:message code="NewAccount"/> </a>
             </div>
         </div>
     </div>

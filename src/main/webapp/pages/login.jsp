@@ -36,6 +36,11 @@
             </div>
             <div style="padding-top:30px" class="panel-body" >
                 <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                <c:if test="${param.error == 'invalidLoginOrPassword'}">
+                    <div class="alert alert-error">
+                        <spring:message code="InvalidAuthorization"/>
+                    </div>
+                </c:if>
                 <c:url value="/j_spring_security_check" var="loginUrl" />
                 <form action="${loginUrl}" method="post" id="loginform" class="form-horizontal" role="form">
                     <div style="margin-bottom: 25px" class="input-group">
@@ -59,11 +64,6 @@
                             </div>
                     </div>
                 </form>
-                <c:if test="${param.error == 'invalidLoginOrPassword'}">
-                    <div class="alert alert-error">
-                        <spring:message code="InvalidAuthorization"/>
-                    </div>
-                </c:if>
             </div>
         </div>
     </div>

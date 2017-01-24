@@ -42,10 +42,8 @@
                             <tr id="tr-id-1" class="tr-class-1">
                                 <td>${user.login}</td>
                                 <td><a href="admin/info/${user.id}"/><spring:message code="Accounts"/> </td>
-
                             </tr>
                         </c:forEach>
-                        <button href="/newClient"><spring:message code="NewClient"/> </button>
                         </tbody>
                     </table>
                 </c:if>

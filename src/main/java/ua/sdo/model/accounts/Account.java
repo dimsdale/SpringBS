@@ -25,6 +25,12 @@ public class Account {
     @Type(type = "timestamp")
     private Date date_of_open;
 
+    @Column(name = "term_of_credit")
+    private int term_of_credit;
+
+    @Column(name = "everymonth_payment")
+    private double everymonthPayment;
+
     @Column(name = "percentage", nullable = false)
     private int percentage;
 
@@ -46,6 +52,22 @@ public class Account {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "account")
     private Set<Payment> payments;
+
+    public int getTerm_of_credit() {
+        return term_of_credit;
+    }
+
+    public void setTerm_of_credit(int term_of_credit) {
+        this.term_of_credit = term_of_credit;
+    }
+
+    public double getEverymonthPayment() {
+        return everymonthPayment;
+    }
+
+    public void setEverymonthPayment(double everymonthPayment) {
+        this.everymonthPayment = everymonthPayment;
+    }
 
     public Set<Payment> getPayments() {
         return payments;

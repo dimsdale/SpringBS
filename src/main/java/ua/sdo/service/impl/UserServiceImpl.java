@@ -3,6 +3,7 @@ package ua.sdo.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import ua.sdo.constants.Constant;
 import ua.sdo.model.users.User;
 import ua.sdo.repository.RoleRepository;
 import ua.sdo.repository.UserRepository;
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void createUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(roleRepository.getOne(1));
+        user.setRole(roleRepository.getOne(Constant.ROLE_USER_ID));
         userRepository.save(user);
     }
 
@@ -47,6 +48,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User getByIdUser(int id) {
+        return userRepository.getOne(id);
     }
 
     @Override

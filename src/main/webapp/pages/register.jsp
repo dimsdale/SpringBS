@@ -42,7 +42,7 @@
                         <div class="col-md-4">
                             <springUtil:bind path="login">
                                 <spring:input path="login" id="login" class="form-control input-md" type="text"/>
-                                <spring:errors path="login" cssClass="alert alert-error" />
+                                <spring:errors path="login" cssClass="alert" />
                             </springUtil:bind>
 
                         </div>

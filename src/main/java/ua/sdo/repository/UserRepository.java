@@ -9,7 +9,7 @@ import ua.sdo.model.users.User;
 
 import java.util.List;
 
-@Repository("userRepository")
+@Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("select u from User u where u.login = :login")

@@ -11,5 +11,6 @@ public interface UserService{
     void updateLogin(String login, int id);
     void updatePassword(String password, int id );
     List<User> getAll();
+    User getByIdUser(int id);
     List<User> getAllClients();
 }

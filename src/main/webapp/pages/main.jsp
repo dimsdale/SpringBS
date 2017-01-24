@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -41,6 +42,7 @@
                         <tr>
                             <th><spring:message code="Sum"/> </th>
                             <th><spring:message code="Percentage"/> </th>
+                            <th><spring:message code="Term"/> </th>
                             <th><spring:message code="Type"/> </th>
                             <th><spring:message code="DateOpen"/> </th>
                             <th><spring:message code="Status"/> </th>
@@ -53,10 +55,11 @@
                             <tr id="tr-id-1" class="tr-class-1">
                                 <td>${account.sum}</td>
                                 <td>${account.percentage}</td>
+                                <td>${account.term_of_credit}</td>
                                 <td>${account.accountType.name}</td>
-                                <td>${account.date_of_open}</td>
+                                <td><fmt:formatDate value="${account.date_of_open}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
                                 <td>${account.accountStatus.name}</td>
-                                <td>${account.date_of_close}</td>
+                                <td><fmt:formatDate value="${account.date_of_close}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
                                 <td><a href="info/${account.id}"/><spring:message code="View"/> </td>
 
                             </tr>
