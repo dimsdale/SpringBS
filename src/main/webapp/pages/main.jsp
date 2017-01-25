@@ -17,6 +17,11 @@
     <div class = "navbar-header">
         <a class = "navbar-brand"><spring:message code="WebBanking"/> </a>
     </div>
+    <div>
+        <ul class = "nav navbar-nav">
+            <li class="navbar-brand"><sec:authentication property="principal.username"/></li>
+        </ul>
+    </div>
 </nav>
 <sec:authorize access="!isAuthenticated()">
     <c:redirect url="/"/>
@@ -35,7 +40,7 @@
                     <li><a href="/logout"><i class="fa fa-bar-chart-o fa-fw"></i><spring:message code="Logout"/> </a></li>
                 </ul>
             </div>
-            <div id="result" class="col-md-6 well">
+            <div id="result" class="col-md-7 well">
                 <c:if test="${!empty accountsList}">
                     <table data-toggle="table" class="table table h6">
                         <thead>
@@ -61,7 +66,6 @@
                                 <td>${account.accountStatus.name}</td>
                                 <td><fmt:formatDate value="${account.date_of_close}" pattern="dd-MM-yyyy HH:mm:ss"/></td>
                                 <td><a href="info/${account.id}"/><spring:message code="View"/> </td>
-
                             </tr>
                         </c:forEach>
                         </tbody>

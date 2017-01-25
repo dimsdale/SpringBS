@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="confirmPassword"><springUtil:message code="Password"/> </label>
+                        <label class="col-md-4 control-label" for="confirmPassword"><springUtil:message code="confirmPassword"/> </label>
                         <div class="col-md-4">
                             <springUtil:bind path="confirmPassword">
                                 <spring:input path="confirmPassword" id="confirmPassword" type="password" class="form-control input-md" />

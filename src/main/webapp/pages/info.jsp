@@ -21,6 +21,11 @@
         <div class = "navbar-header">
             <a class = "navbar-brand"><spring:message code="WebBanking"/> </a>
         </div>
+        <div>
+            <ul class = "nav navbar-nav">
+                <li class="navbar-brand"><sec:authentication property="principal.username"/></li>
+            </ul>
+        </div>
     </nav>
     <div class="container">
         <div class="row">

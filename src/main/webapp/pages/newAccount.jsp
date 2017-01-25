@@ -18,6 +18,11 @@
     <div class = "navbar-header">
         <a class = "navbar-brand"><springUtils:message code="WebBanking"/> </a>
     </div>
+    <div>
+        <ul class = "nav navbar-nav">
+            <li class="navbar-brand"><sec:authentication property="principal.username"/></li>
+        </ul>
+    </div>
 </nav>
 <sec:authorize access="!hasRole('ROLE_ADMIN') or !isAuthenticated()">
     <c:redirect url="/"/>

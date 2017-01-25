@@ -66,7 +66,7 @@
 
 # INSERT INTO roles VALUES (1, 'ROLE_USER');
 # INSERT INTO roles VALUES (2, 'ROLE_ADMIN');
-# INSERT INTO user VALUES (1, 'admin','password', 2);
+# INSERT INTO user VALUES (1, 'admin','$2a$10$e8tVn3O2d.yjqbWj4DYwRugRHav8ZJAjqSdsL83pwmChVX7S7dfMq', 2);
 # INSERT INTO account_status VALUES (1, 'Open');
 # INSERT INTO account_status VALUES (2, 'Close');
 # INSERT INTO account_type VALUES (1, 'Credit');

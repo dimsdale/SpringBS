@@ -24,7 +24,7 @@
 
 <div>
     <ul class = "nav navbar-nav">
-        <li><a href = "/enter"><spring:message code="Login"/> </a></li>
+        <li><a href = "/enter"><spring:message code="Authorization"/> </a></li>
         <li><a href = "/register"><spring:message code="Register"/> </a></li>
     </ul>
 </div>

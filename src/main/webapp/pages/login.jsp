@@ -32,7 +32,7 @@
         <div class="panel panel-info" >
             <div class="panel-heading">
                 <div class="panel-title"><spring:message code="Authorization"/> </div>
-                <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="/restore"><spring:message code="ForgotPassword"/> </a></div>
+                <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="/#"><spring:message code="ForgotPassword"/> </a></div>
             </div>
             <div style="padding-top:30px" class="panel-body" >
                 <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
@@ -60,7 +60,7 @@
                     </div>
                     <div style="margin-top:10px" class="form-group">
                         <div class="col-sm-12 controls">
-                            <button id="btn-login" type="submit" class="btn btn-success"><spring:message code="Login"/>  </button>
+                            <button id="btn-login" type="submit" class="btn btn-success"><spring:message code="Enter"/>  </button>
                             </div>
                     </div>
                 </form>
